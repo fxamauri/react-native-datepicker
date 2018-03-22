@@ -30,11 +30,13 @@ class DatePicker extends Component {
 
     this.state = {
       date: this.getDate(),
+      locale: this.getLocale(),
       modalVisible: false,
       animatedHeight: new Animated.Value(0),
       allowPointerEvents: true
     };
 
+    this.getLocale = this.getLocale.bind(this);
     this.getDate = this.getDate.bind(this);
     this.getDateStr = this.getDateStr.bind(this);
     this.datePicked = this.datePicked.bind(this);
@@ -121,6 +123,10 @@ class DatePicker extends Component {
     if (typeof this.props.onCloseModal === 'function') {
       this.props.onCloseModal();
     }
+  }
+
+  getLocale(locale = this.props.locale) {
+    return locale;
   }
 
   getDate(date = this.props.date) {
@@ -352,15 +358,15 @@ class DatePicker extends Component {
         testID={testID}
       >
         <View style={[Style.dateTouchBody, customStyles.dateTouchBody]}>
+          {this._renderIcon()}
           {
             !this.props.hideText ?
               <View style={dateInputStyle}>
                 {this.getTitleElement()}
               </View>
-            :
+              :
               <View/>
           }
-          {this._renderIcon()}
           {Platform.OS === 'ios' && <Modal
             transparent={true}
             animationType="none"
@@ -393,6 +399,7 @@ class DatePicker extends Component {
                         onDateChange={this.onDateChange}
                         minuteInterval={minuteInterval}
                         timeZoneOffsetInMinutes={timeZoneOffsetInMinutes}
+                        locale={this.state.locale}
                         style={[Style.datePicker, customStyles.datePicker]}
                         locale={locale}
                       />
