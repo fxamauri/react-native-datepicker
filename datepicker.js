@@ -334,7 +334,8 @@ class DatePicker extends Component {
       TouchableComponent,
       testID,
       cancelBtnTestID,
-      confirmBtnTestID
+      confirmBtnTestID,
+      locale
     } = this.props;
 
     const dateInputStyle = [
@@ -393,6 +394,7 @@ class DatePicker extends Component {
                         minuteInterval={minuteInterval}
                         timeZoneOffsetInMinutes={timeZoneOffsetInMinutes}
                         style={[Style.datePicker, customStyles.datePicker]}
+                        locale={locale}
                       />
                     </View>
                     <TouchableComponent
@@ -446,7 +448,8 @@ DatePicker.defaultProps = {
   hideText: false,
   placeholder: '',
   TouchableComponent: TouchableHighlight,
-  modalOnResponderTerminationRequest: e => true
+  modalOnResponderTerminationRequest: e => true,
+  locale : 'en_US'
 };
 
 DatePicker.propTypes = {
@@ -471,7 +474,8 @@ DatePicker.propTypes = {
   onPressMask: PropTypes.func,
   placeholder: PropTypes.string,
   modalOnResponderTerminationRequest: PropTypes.func,
-  is24Hour: PropTypes.bool
+  is24Hour: PropTypes.bool,
+  locale: PropTypes.string
 };
 
 export default DatePicker;
